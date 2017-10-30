@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script>
+        /*
         var _TheArray = [["0-1","0-2","0-3"],["1-1","1-2"],["2-1","2-2"]];
         console.log(_TheArray);
         console.log(_TheArray[1].length);
 
-        /*
+
          function Find(target, array) {
          var row=array.length-1,j;
          for(i=row,j=0;i>=0&&j<=array[i].length-1){
@@ -43,8 +44,80 @@
          }
          }
          return false;
-         } */
+         }
 
+
+        var root = {value: null, left: null, right: null};
+        function build(root, s1, s2) {
+            if (s1.length === 0 || s2.length === 0 ) {
+                return;
+            }
+
+            var midnode = s2.indexOf(s1[0]);
+            var mleft = s2.substring(0, midnode),
+                mright = s2.substring(midnode + 1);
+            var pleft = s1.substring(1, mleft.length + 1),
+                pright = s1.substring(mleft.length + 1);
+            root.value = s1[0];
+            root.left = newchild();
+            root.right = newchild();
+
+            if(root.value) {
+                build(root.left, pleft, mleft);
+                build(root.right, pright, mright);
+            }
+        }
+        function newchild() {
+            return {value: null, left: null, right: null}
+        }
+        build(root, 'DBACEGF', 'ABCDEFG');
+        console.log(build);
+
+        function postrav(root) {
+            if(root.value!==null){
+                postrav(root.left);
+                postrav(root.right);
+                console.log(root.value);
+            }
+
+        }
+        postrav(root);
+         */
+//        function TreeNode(x) {
+//            this.val = x;
+//            this.left = null;
+//            this.right = null;
+//        }
+        function reConstructBinaryTree(pre, vin)
+        {
+            if(pre.length===0||!pre){
+                return;
+            }
+            var root = {
+                val: pre[0]
+            };
+            var everyroot =vin.indexOf(pre[0]);
+//            var root={left:null,right:null};
+//            root=pre[0];
+            root.left=reConstructBinaryTree(pre.slice(1,everyroot+1),vin.slice(0,everyroot));
+            root.right=reConstructBinaryTree(pre.slice(everyroot+1),vin.slice(everyroot+1));
+
+            return root;
+
+        }
+        console.log(reConstructBinaryTree('12473568','47215386'));
+
+    </script>
+
+    <script>
+        /*
+        var root={a:null,b:null};
+        root.a=1;
+        root.b=2;
+        console.log(root);
+        */
+        var a='123';
+        alert(a[2]);
     </script>
 </head>
 <body>
